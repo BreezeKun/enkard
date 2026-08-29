@@ -35,5 +35,5 @@ asyncio.run(main())
 #custom image - {char1:https..,char2:https...}
 #akasha - check test_result.json i havnt added it in card
 ```
-Note: This is not final version of what i want to create it might have issues
+<marquee>Note: This is not final version of what i want to create it might have issues</marquee>
 report: Tg- @BreezeSama
