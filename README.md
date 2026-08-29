@@ -35,5 +35,9 @@ asyncio.run(main())
 #custom image - {char1:https..,char2:https...}
 #akasha - check test_result.json i havnt added it in card
 ```
+
+### Template Example
+<img src = "example/skirk_card.png">hmm</img>
+
 <marquee>Note: This is not final version of what i want to create it might have issues</marquee>
 report: Tg- @BreezeSama
