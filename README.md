@@ -1,3 +1,6 @@
+### A library to create genshin character build cards [ref: example/]
+### Usage:
+```python
 import json
 import asyncio
 from enkard.enkacard.utils.create_banner_one import generationOne
@@ -23,3 +26,8 @@ async def main() -> None:
             banner.save(f"{name}.png")
 
 asyncio.run(main())
+#custom image - {char1:https..,char2:https...}
+#akasha - check test_result.json i havnt added it in card
+```
+Note: This is not final version of what i want to create it might have issues
+report: Tg- @BreezeSama
