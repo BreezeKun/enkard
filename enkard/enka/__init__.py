@@ -1,6 +1,6 @@
 from loguru import logger as _logger
 
-from . import errors, gi, utils
+from . import errors, gi
 from .clients import GenshinClient, cache
 from .enums.enum import Game
 from .models.enka import Owner, OwnerProfile
@@ -16,7 +16,6 @@ __all__ = (
     "cache",
     "errors",
     "gi",
-    "utils",
 )
 
 _logger.disable("enka")  # noqa: RUF067
