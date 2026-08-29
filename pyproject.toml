@@ -1,0 +1,44 @@
+[build-system]
+requires = [
+    "setuptools>=61",
+    "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "enkard"
+version = "0.1.0"
+description = "Card generator and fetching basic data for Genshin Impact"
+readme = "README.md"
+requires-python = ">=3.10"
+
+authors = [
+    { name = "Breeze" }
+]
+
+dependencies = [
+    "aiofiles",
+    "aiohttp",
+    "aiosqlite",
+    "asyncache",
+    "cachetools",
+    "loguru",
+    "numpy",
+    "orjson",
+    "Pillow",
+    "pydantic",
+]
+
+
+[tool.setuptools.packages.find]
+include = [
+    "enkard*",
+]
+
+
+[tool.setuptools.package-data]
+"enkard.enkacard" = [
+    "assets/**/*.png",
+    "assets/**/*.ttf",
+]
