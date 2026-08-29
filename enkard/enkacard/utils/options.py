@@ -1,5 +1,3 @@
-# Copyright 2022 DEViantUa <t.me/deviant_ua>
-# All rights reserved.
 from PIL import ImageFont
 from . import open_file
 
