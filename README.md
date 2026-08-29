@@ -1,4 +1,10 @@
 ### A library to create genshin character build cards [ref: example/]
+
+## installation
+```shell
+pip install git+https://github.com/BreezeKun/enkard.git
+```
+
 ### Usage:
 ```python
 import json
