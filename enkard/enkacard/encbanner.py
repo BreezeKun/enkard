@@ -243,25 +243,30 @@ class GenereteData:
 
         return self.main_data
 
-
 def get_akasha(uid):
     import requests
 
     url = f"https://akasha.cv/api/getCalculationsForUser/{uid}"
 
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/139.0.0.0 Safari/537.36"
+        ),
+        "Accept": "application/json",
+        "Referer": "https://akasha.cv/",
+        "Origin": "https://akasha.cv",
+    }
+
     try:
         response = requests.get(
             url,
-            headers={
-                "User-Agent": "Mozilla/5.0",
-                "Accept": "application/json, text/plain, */*",
-                "Referer": "https://akasha.cv/",
-            },
+            headers=headers,
             timeout=15,
         )
 
         response.raise_for_status()
-
         return response.json()
 
     except requests.RequestException as e:
