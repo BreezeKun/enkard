@@ -5,14 +5,21 @@ import aiohttp
 from asyncache import cached
 from cachetools import TTLCache
 
-@cached(TTLCache(200, ttl=20))  
-async def dowloadImg(link = ""):
-    try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(link) as response:
-                return await response.read()
-    except:
-        raise
+@cached(TTLCache(200, ttl=20))
+async def dowloadImg(link=""):
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Linux; Android 10) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/150.0.0.0 Mobile Safari/537.36"
+        ),
+        "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+    }
+
+    async with aiohttp.ClientSession(headers=headers) as session:
+        async with session.get(link, allow_redirects=True) as response:
+            response.raise_for_status()
+            return await response.read()
 
 async def imagSize(link = "", image = None, fixed_width = 0, size = None):
     if not image:
