@@ -44,7 +44,6 @@ class GenereteData:
                 "custom_image": self.custom_image.get(character["name"]) if self.custom_image else None,
                 "ranking":None,
                 "icon": {
-                    "is_costume": icon.get("is_costume"),
                     "side": icon.get("side"),
                     "circle": icon.get("circle"),
                     "gacha": icon.get("gacha"),
