@@ -3,8 +3,6 @@ import random
 from collections import namedtuple
 from math import sqrt
 import random
-import numpy
-from numpy import dtype
 
 class Mark(object):
     def __init__(self, x, y):
