@@ -24,7 +24,6 @@ dependencies = [
     "asyncache",
     "cachetools",
     "loguru",
-    "numpy",
     "orjson",
     "Pillow",
     "pydantic",
