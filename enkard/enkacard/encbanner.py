@@ -245,7 +245,7 @@ class GenereteData:
 import curl_cffi
 
 
-async def get_akasha(uid):
+def get_akasha(uid):
     url = f"https://akasha.cv/api/getCalculationsForUser/{uid}"
 
     headers = {
@@ -255,11 +255,11 @@ async def get_akasha(uid):
     }
 
     try:
-        async with curl_cffi.AsyncSession(
+        with curl_cffi.AsyncSession(
             impersonate="chrome"
         ) as session:
 
-            response = await session.get(
+            response = session.get(
                 url,
                 headers=headers,
                 timeout=15,
