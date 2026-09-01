@@ -242,49 +242,34 @@ class GenereteData:
 
         return self.main_data
 
-def get_akasha(uid):
-    import subprocess
-    import json
+import curl_cffi
 
+
+async def get_akasha(uid):
     url = f"https://akasha.cv/api/getCalculationsForUser/{uid}"
 
-    headers = [
-        "-H",
-        "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/139.0.0.0 Safari/537.36",
-
-        "-H",
-        "Accept: application/json",
-
-        "-H",
-        "Referer: https://akasha.cv/",
-
-        "-H",
-        "Origin: https://akasha.cv",
-    ]
+    headers = {
+        "Accept": "application/json",
+        "Referer": "https://akasha.cv/",
+        "Origin": "https://akasha.cv",
+    }
 
     try:
-        result = subprocess.run(
-            ["curl", "-sS", *headers, url],
-            capture_output=True,
-            text=True,
-            timeout=15,
-            check=True,
-        )
+        async with curl_cffi.AsyncSession(
+            impersonate="chrome"
+        ) as session:
 
-        return json.loads(result.stdout)
+            response = await session.get(
+                url,
+                headers=headers,
+                timeout=15,
+            )
 
-    except subprocess.TimeoutExpired:
-        print("Akasha request timed out")
-        return None
+            response.raise_for_status()
+            return response.json()
 
-    except subprocess.CalledProcessError as e:
-        print(f"Akasha curl failed: {e.stderr}")
-        return None
-
-    except json.JSONDecodeError as e:
-        print(f"Invalid Akasha response: {e}")
+    except curl_cffi.requests.errors.RequestsError as e:
+        print(f"Akasha request failed: {e}")
         return None
 
 

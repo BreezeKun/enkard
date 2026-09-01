@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "enkard"
-version = "0.1.1"
+version = "0.1.2"
 description = "Card generator and fetching basic data for Genshin Impact"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -27,6 +27,7 @@ dependencies = [
     "orjson",
     "Pillow",
     "pydantic",
+    "curl_cffi"
 ]
 
 
