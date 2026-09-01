@@ -1,13 +1,7 @@
-import asyncio
-import random
-import os
-import datetime
 from typing import Optional
 from collections import Counter
 
-
-from collections import Counter
-from typing import Optional
+import curl_cffi
 
 
 class GenereteData:
@@ -242,34 +236,30 @@ class GenereteData:
 
         return self.main_data
 
-import curl_cffi
-
-
 def get_akasha(uid):
     url = f"https://akasha.cv/api/getCalculationsForUser/{uid}"
 
-    headers = {
-        "Accept": "application/json",
-        "Referer": "https://akasha.cv/",
-        "Origin": "https://akasha.cv",
-    }
-
     try:
-        with curl_cffi.AsyncSession(
-            impersonate="chrome"
-        ) as session:
+        response = curl_cffi.get(
+            url,
+            headers={
+                "Accept": "application/json",
+                "Referer": "https://akasha.cv/",
+                "Origin": "https://akasha.cv",
+            },
+            impersonate="chrome",
+            timeout=15,
+        )
 
-            response = session.get(
-                url,
-                headers=headers,
-                timeout=15,
-            )
-
-            response.raise_for_status()
-            return response.json()
+        response.raise_for_status()
+        return response.json()
 
     except curl_cffi.requests.errors.RequestsError as e:
         print(f"Akasha request failed: {e}")
+        return None
+
+    except ValueError as e:
+        print(f"Akasha returned invalid JSON: {e}")
         return None
 
 
