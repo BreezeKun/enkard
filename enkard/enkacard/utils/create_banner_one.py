@@ -205,16 +205,48 @@ async def constant(character, element):
 
 async def create_picture(character, adapt, splash=None):
     element = character["element"]
-    customImage = character.get("custom_image")
-    imgs = (await openUserImg(customImage)) if customImage else await openUserImg(character["icon"].get("gacha"))
+
+    custom_image = character.get("custom_image")
+    gacha_image = character.get("icon", {}).get("gacha")
+
+    costume = character.get("costume")
+    costume_image = (
+        "https://enka.network" + str(costume["data"].get("Art"))
+        if costume and costume["data"].get("Art")
+        else None
+    )
+    if custom_image:
+        imgs = await openUserImg(custom_image)
+    elif costume_image:
+        imgs = await openUserImg(costume_image)
+    elif gacha_image:
+        imgs = await openUserImg(gacha_image)
+    else:
+        imgs = None
 
     if imgs:
-        frame = userImage(imgs, element=element, adaptation=adapt)
+        frame = userImage(
+            imgs,
+            element=element,
+            adaptation=adapt,
+        )
     else:
-        # no custom crop supplied - fall back to a full splash image
-        link = splash or (character.get("namecard") or {}).get("full") or character["icon"]["gacha"]
-        banner = await imagSize(link=link, size=(2048, 1024))
+        link = (
+            splash
+            or character.get("namecard", {}).get("full")
+            or gacha_image
+        )
+
+        if not link:
+            return None
+
+        banner = await imagSize(
+            link=link,
+            size=(2048, 1024),
+        )
+
         frame = maskaAdd(element, banner)
+
     return frame
 
 
