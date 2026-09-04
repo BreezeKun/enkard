@@ -22,6 +22,17 @@ class GenereteData:
             28,    # Elemental Mastery
         }
 
+        specialized_types = {
+            30,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46
+        }
+
         for character in self.data.get("characters") or []:
 
             # Basic character information
@@ -181,20 +192,16 @@ class GenereteData:
                 for stat in character_stats.values()
                 if (
                     stat
-                    and stat.get("type") in calculated_types
                     and stat.get("name")
+                    and (
+                        stat.get("type") in calculated_types
+                        or (
+                            stat.get("type") in specialized_types
+                            and stat.get("value", 0) != 0
+                        )
+                    )
                 )
             }
-
-            #adding specal stats
-
-            specialized_stat = character.get("specialized_stat")
-
-            if specialized_stat and round(specialized_stat.get("value", 0)) != 0:
-                data["stats"][specialized_stat["name"]] = {
-                    "value": specialized_stat["formatted_value"],
-                    "is_percentage": specialized_stat["is_percentage"],
-                }
 
             # Constellations
 
