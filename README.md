@@ -25,9 +25,6 @@ async def main() -> None:
             banner = await generationOne(
                 dat,
                 adapt=False,
-                lvl="Level",
-                uid="1817389136",
-                hide_uid=False,
             )
             banner.save(f"{name}.png")
 
