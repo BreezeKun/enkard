@@ -399,7 +399,7 @@ async def appedFrame(frame, weaponRes, nameRes, statRes, constantRes, talatsRes,
     return banner
 
 
-async def generationOne(character, adapt=False, lvl="Level", uid=None, hide_uid=True, splash=None):
+async def generationOne(character, adapt=False, lvl="Level", splash=None):
     """
     Entry point matching the new library's output shape - pass in one character's
     dict, e.g. `data["Skirk"]` from test_result.json.
