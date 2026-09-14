@@ -37,4 +37,4 @@ asyncio.run(main())
 <img src = "example/skirk_card.png">hmm</img>
 
 <marquee>Note: This is not final version of what i want to create it might have issues</marquee><br>
-report: Tg- https://t.me/+Drq73Q20_f9hYmJl
+Create a issue request if thers any problem or issue in library
