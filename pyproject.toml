@@ -27,7 +27,8 @@ dependencies = [
     "orjson",
     "Pillow",
     "pydantic",
-    "curl_cffi"
+    "curl_cffi",
+    "enka"
 ]
 
 
