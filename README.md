@@ -10,7 +10,7 @@ pip install git+https://github.com/BreezeKun/enkard.git
 import json
 import asyncio
 from enkard.enkacard.utils.create_banner_one import generationOne
-from enkard.enka import GenshinClient, gi
+from enka import GenshinClient, gi
 from enkard.enkacard.encbanner import CreateBanner
 
 async def main() -> None:
