@@ -2,7 +2,7 @@ import json
 import asyncio
 
 from enkard.enkacard.utils.create_banner_one import generationOne
-from enkard.enka import GenshinClient, gi
+from enka import GenshinClient, gi
 from enkard.enkacard.encbanner import CreateBanner
 
 
@@ -10,10 +10,16 @@ async def main() -> None:
     async with GenshinClient(gi.Language.ENGLISH) as client:
         response = await client.fetch_showcase(1817389136)
         data = response.model_dump()
-
+        with open("test.json", "w", encoding="utf-8") as f:
+                    json.dump(
+                        data,
+                        f,
+                        indent=4,
+                        ensure_ascii=False
+                    )
         response = CreateBanner(
             data=data,
-            akasha=True
+            custom_image={"Skirk":"https://ik.imagekit.io/cocogoat/1352449904-10000114_WWvIz_L1L"}
         ).generate()
 
         with open("test_result.json", "w", encoding="utf-8") as f:
@@ -26,16 +32,10 @@ async def main() -> None:
 
         dat = response
 
-        print(dat["Traveler"])
-
         banner = await generationOne(
-            dat["Traveler"],
-            adapt=False,
-            lvl="Level",
-            uid="1817389136",
-            hide_uid=False,
+            dat["Skirk"],
+            adapt=True,
         )
-
         banner.save("test.png")
 
 
